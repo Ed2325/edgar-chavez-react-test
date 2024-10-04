@@ -1,57 +1,55 @@
-import "./App.css";
-import Login from "./screens/Login/Login";
-import Products from "./screens/Products/Products"; 
-import NotFound from "./screens/NotFound/NotFound";
-import ProductDetail from "./screens/ProductDetails/ProductDetails";
-import CreateProduct from "./screens/CreateProduct/CreateProduct";
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./store";
-import { logout, extendSession } from "./slices/authSlice";
+import { logout, extendSession, selectIsSessionValid } from "./slices/authSlice";
+import Login from "./screens/Login/Login";
+import Products from "./screens/Products/Products";
+import NotFound from "./screens/NotFound/NotFound";
+import ProductDetail from "./screens/ProductDetails/ProductDetails";
+import CreateProduct from "./screens/CreateProduct/CreateProduct";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
-  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+  const isSessionValid = useSelector((state: RootState) => selectIsSessionValid(state));
   const sessionExpiry = useSelector((state: RootState) => state.auth.sessionExpiry);
   const dispatch = useDispatch();
 
+  // Session timeout logic
   useEffect(() => {
-    if (isAuthenticated && sessionExpiry) {
+    if (isSessionValid && sessionExpiry) {
       const remainingTime = sessionExpiry - Date.now();
+      const timeoutId = setTimeout(() => dispatch(logout()), remainingTime);
 
-      const timeoutId = setTimeout(() => {
-        dispatch(logout()); 
-      }, remainingTime);
-
-      return () => clearTimeout(timeoutId); 
+      return () => clearTimeout(timeoutId);
     }
-  }, [isAuthenticated, sessionExpiry, dispatch]);
+  }, [isSessionValid, sessionExpiry, dispatch]);
 
+  // Extend session on user activity
   useEffect(() => {
-    const handleUserActivity = () => {
-      if (isAuthenticated) {
-        dispatch(extendSession());
-      }
-    };
-
-    window.addEventListener("mousemove", handleUserActivity);
-    window.addEventListener("keydown", handleUserActivity);
+    const resetSessionTimer = () => isSessionValid && dispatch(extendSession());
+    window.addEventListener("mousemove", resetSessionTimer);
+    window.addEventListener("keydown", resetSessionTimer);
 
     return () => {
-      window.removeEventListener("mousemove", handleUserActivity);
-      window.removeEventListener("keydown", handleUserActivity);
+      window.removeEventListener("mousemove", resetSessionTimer);
+      window.removeEventListener("keydown", resetSessionTimer);
     };
-  }, [isAuthenticated, dispatch]);
+  }, [isSessionValid, dispatch]);
 
   return (
     <Router>
-      <Routes>
+      <Routes>x
+        {/* Public Routes */}
         <Route path='/login' element={<Login />} />
-        <Route path='/' element={isAuthenticated ? <Products /> : <Navigate to='/login' />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/createProduct" element={<CreateProduct/>} />
-        <Route path="/404" element={<NotFound />} /> 
-        <Route path='*' element={<Navigate to={isAuthenticated ? '/' : '/login'} />} />
+        <Route path='/404' element={<NotFound />} />
+
+        {/* Protected Routes */}
+        <Route path='/' element={<PrivateRoute element={<Products />} />} />
+        <Route path='/products/:id' element={<PrivateRoute element={<ProductDetail />} />} />
+        <Route path='/createProduct' element={<PrivateRoute element={<CreateProduct />} />} />
+
+        <Route path='*' element={<Navigate to={isSessionValid ? '/' : '/login'} />} />
       </Routes>
     </Router>
   );
