@@ -15,7 +15,7 @@ function App() {
   const sessionExpiry = useSelector((state: RootState) => state.auth.sessionExpiry);
   const dispatch = useDispatch();
 
-  // Session timeout logic
+ 
   useEffect(() => {
     if (isSessionValid && sessionExpiry) {
       const remainingTime = sessionExpiry - Date.now();
@@ -25,7 +25,7 @@ function App() {
     }
   }, [isSessionValid, sessionExpiry, dispatch]);
 
-  // Extend session on user activity
+  
   useEffect(() => {
     const resetSessionTimer = () => isSessionValid && dispatch(extendSession());
     window.addEventListener("mousemove", resetSessionTimer);

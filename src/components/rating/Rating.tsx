@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./Rating.module.scss";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-// Define the props type
 interface RatingProps {
   value: number;
 }

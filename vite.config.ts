@@ -5,9 +5,12 @@ export default defineConfig({
   plugins: [
     react()
   ],
+  build: {
+    outDir: 'dist', 
+    sourcemap: false,
+  },
   css: {
-    modules: {
-      // You can define how class names get converted (optional)
+    modules: { 
       localsConvention: "camelCaseOnly",
     },
   },
