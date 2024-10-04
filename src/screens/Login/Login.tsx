@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../slices/authSlice";
+import { useNavigate } from "react-router-dom"; 
 import styles from "./Login.module.scss";
 import { Login as LoginIcon } from "@mui/icons-material";
 
 interface ValidationErrors {
   password: string;
-  confirmPassword: string;
+  confirmPassword: string;   
 }
 
 const Login: React.FC = () => {
@@ -15,6 +18,9 @@ const Login: React.FC = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -64,8 +70,12 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+  
     if (validateEmail(email) && !errors.password && !errors.confirmPassword) {
       console.log("Login successful:", { email, password });
+      dispatch(login()); 
+      navigate('/products'); 
     } else {
       console.log("Validation failed.");
     }

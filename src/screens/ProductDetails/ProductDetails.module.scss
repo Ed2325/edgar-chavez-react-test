@@ -1,0 +1,35 @@
+.productWrapper {
+  min-height: 100vh;
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  button {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin: 0 0 3rem 0;
+  }
+  button:hover {
+    background-color: rgb(102, 102, 208);
+    color: white;
+  }
+}
+.card {
+  display: flex;
+  min-height: 80vh;
+  background-color: paleturquoise;
+  img {
+    width: 400px;
+    height: 400px;
+  }
+}
+.cardDetails {
+  font-size: 3rem;
+  padding: 2rem;
+  h1,
+  p {
+    margin: 0 0 2rem 0;
+  }
+}

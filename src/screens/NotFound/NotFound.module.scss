@@ -1,0 +1,18 @@
+.notFoundWrapper {
+  width: 80vw;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notFoundCard {
+  height: 300px;
+  width: 500px;
+  font-size: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.1rem solid black;
+  color: rgb(215, 55, 55);
+}

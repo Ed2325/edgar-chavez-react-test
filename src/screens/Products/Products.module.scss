@@ -1,0 +1,62 @@
+.productsWrapper {
+  min-height: 100vh;
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.navBar {
+  min-height: 8vh;
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  h1 {
+    padding: 0 1rem 0 0;
+  }
+  input {
+    width: 80%;
+  }
+}
+
+.productsTable {
+  min-height: 60vh;
+  thead {
+    font-size: 3rem;
+    height: 5vh;
+  }
+  tbody {
+    background-color: rgba(233, 241, 246, 0.562);
+    a {
+      text-decoration: none;
+      color: rgb(74, 74, 147);
+      font-size: 1.2rem;
+    }
+    a:hover {
+      color: rgb(102, 102, 208);
+    }
+    td {
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    img {
+      width: 82px;
+      height: 82px;
+    }
+  }
+}
+.pagination {
+  font-size: 2rem;
+  button {
+    padding: 1rem;
+    cursor: pointer;
+    margin: 0 1rem 0 0;
+  }
+  button:hover {
+    background-color: rgb(56, 56, 76);
+    color: white;
+  }
+}
