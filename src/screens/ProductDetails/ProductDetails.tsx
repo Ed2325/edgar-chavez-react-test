@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
 import axios from "axios";
 import styles from "./ProductDetails.module.scss";
 import { ArrowBack } from "@mui/icons-material";
+import Rating from "../../components/rating/Rating";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,8 +42,9 @@ const ProductDetail: React.FC = () => {
         <div className={styles.cardDetails}>
           <h1>{product.title}</h1>
           <p>{product.description}</p>
-          <p>Price: ${product.price}</p>
           <p>{product.category}</p>
+          <p>Price: ${product.price}</p>
+          <Rating value={product.rating.rate} />
         </div>
       </div>
     </div>

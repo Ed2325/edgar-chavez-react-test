@@ -49,3 +49,16 @@
     color: rgb(21, 21, 79);
 }
 }
+
+@media screen and (max-width: 1000px){
+    
+    .loginForm{
+        width: 60%;
+    }
+}
+@media screen and (max-width: 700px){
+    .loginForm{
+        width: 90%;
+    }
+  
+}

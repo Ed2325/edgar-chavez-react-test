@@ -63,58 +63,60 @@ const CreateProduct: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.createProductForm}>
-      <h2>Create New Product</h2>
-      <div>
-        <input
-          type='text'
-          name='title'
-          placeholder='Product Title'
-          value={newProduct.title}
-          onChange={handleInputChange}
-        />
-        {formErrors.title && (
-          <span className={styles.error}>{formErrors.title}</span>
-        )}
-      </div>
-      <div>
-        <input
-          type='number'
-          name='price'
-          placeholder='Product Price'
-          value={newProduct.price}
-          onChange={handleInputChange}
-        />
-        {formErrors.price && (
-          <span className={styles.error}>{formErrors.price}</span>
-        )}
-      </div>
-      <div>
-        <input
-          type='text'
-          name='description'
-          placeholder='Product Description'
-          value={newProduct.description}
-          onChange={handleInputChange}
-        />
-        {formErrors.description && (
-          <span className={styles.error}>{formErrors.description}</span>
-        )}
-      </div>
-      <div>
-        <input
-          type='text'
-          name='image'
-          placeholder='Product Image URL'
-          value={newProduct.image}
-          onChange={handleInputChange}
-        />
-        {formErrors.image && (
-          <span className={styles.error}>{formErrors.image}</span>
-        )}
-      </div>
-      <button type='submit'>Create Product</button>
-    </form>
+    <div className={styles.createProductWrapper}>
+      <form onSubmit={handleSubmit} className={styles.createProductForm}>
+        <h2>Create New Product</h2>
+        <div>
+          <input
+            type='text'
+            name='title'
+            placeholder='Product Title'
+            value={newProduct.title}
+            onChange={handleInputChange}
+          />
+          {formErrors.title && (
+            <span className={styles.error}>{formErrors.title}</span>
+          )}
+        </div>
+        <div>
+          <input
+            type='number'
+            name='price'
+            placeholder='Product Price'
+            value={newProduct.price}
+            onChange={handleInputChange}
+          />
+          {formErrors.price && (
+            <span className={styles.error}>{formErrors.price}</span>
+          )}
+        </div>
+        <div>
+          <input
+            type='text'
+            name='description'
+            placeholder='Product Description'
+            value={newProduct.description}
+            onChange={handleInputChange}
+          />
+          {formErrors.description && (
+            <span className={styles.error}>{formErrors.description}</span>
+          )}
+        </div>
+        <div>
+          <input
+            type='text'
+            name='image'
+            placeholder='Product Image URL'
+            value={newProduct.image}
+            onChange={handleInputChange}
+          />
+          {formErrors.image && (
+            <span className={styles.error}>{formErrors.image}</span>
+          )}
+        </div>
+        <button type='submit'>Create Product</button>
+      </form>
+    </div>
   );
 };
 
